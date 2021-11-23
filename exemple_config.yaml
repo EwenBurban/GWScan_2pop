@@ -1,6 +1,7 @@
-wdir:
+work_dir: /scratch/eburban/DomIsol/test_input_module
 binpath: ~/GW_DILS/input_module
-popfile:
+popfile: /scratch/eburban/DomIsol/test_input_module/popfile.csv
+locusLength: 100000
 nameA: wild
 nameB: dom
 Nref: 85000

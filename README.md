@@ -1,5 +1,13 @@
-# GW_Scan
-
+# GWScan_2pop
+This pipeline aim to do genome wide scan of various measures of  molecular population genomics. 
+It suppose that you have vcf files containing 2 populations.
+This pipeline will do the following thing : 
+1. Formating vcf file in order to keep only allelic information
+2. Phasing haplotypes
+3. For each individual, randomly sample one haplotype
+4. calculate for each window the statistics => ABCstat_loci.txt
+5. create a simple manhatan plot for each statistics in => gw_plot.pdf
+ 
 ## Prerequisite
 The following list of programs must be install on your machine:
 - Snakemake
@@ -16,6 +24,9 @@ chmod a+x configure.sh
 Before launching the pipeline you must enter various information in 2 files :
 - the config file (by default I call it config.yaml) 
 - the popfile
+
+an exemple of those two file is aviable (exemple_config.yaml and exemple_popfile.csv)
+
 ### config file
 
 The config file provide various information that are mandatory for the pipeline
