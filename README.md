@@ -7,10 +7,10 @@ The following list of programs must be install on your machine:
 
 ## Installation
 ```
-git clone <url>
+git clone https://github.com/EwenBurban/GWScan_2pop.git
 cd GW_Scan
-chmod a+x configure
-./configure
+chmod a+x configure.sh
+./configure.sh
 ```
 ## Usage
 Before launching the pipeline you must enter various information in 2 files :
