@@ -1,0 +1,10 @@
+Bootstrap: docker
+From: r-base
+
+%post
+apt-get update && apt-get -y  upgrade
+apt install -y curl
+R -e 'install.packages("ggpubr",dependencies=T,repos="http://cran.rstudio.com/")'
+
+%test
+R -e 'library(ggpubr)'

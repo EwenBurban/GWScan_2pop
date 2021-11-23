@@ -1,0 +1,21 @@
+
+{
+    "__default__" :
+    {
+        "node" : 1,
+        "ntasks" : 1,
+        "n" : 1,
+        "p" : "ecobio",
+	"cpusPerTask" : 1,
+	"memPerCpu" : 5000,
+	"time" : "4-04:00:00"
+    },
+    "haplotyping" :
+    {
+	"memPerCpu" : 35000
+    },
+    "convert2ms" :
+    {
+	    "memPerCpu" : 35000
+    }
+}
