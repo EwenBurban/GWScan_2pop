@@ -20,6 +20,7 @@ cd GW_Scan
 chmod a+x configure.sh
 ./configure.sh
 ```
+NOTE that configure.sh require sudo privileges. If you cannot obtain admin permission, see https://cloud.sylabs.io/builder
 ## Usage
 Before launching the pipeline you must enter various information in 2 files :
 - the config file (by default I call it config.yaml) 
