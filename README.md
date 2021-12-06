@@ -16,7 +16,7 @@ The following list of programs must be install on your machine:
 ## Installation
 ```
 git clone https://github.com/EwenBurban/GWScan_2pop.git
-cd GW_Scan
+cd GWScan_2pop
 chmod a+x configure.sh
 ./configure.sh
 ```
