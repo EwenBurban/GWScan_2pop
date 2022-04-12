@@ -32,7 +32,11 @@ vcf.set_axis(header,axis=1,inplace=True) # rename columns name to header
 
 # subset wild and domesticated population
 pop = pd.read_csv(popfile,sep=',',header=0)
-wild_dom = pop[nameA].to_list() + pop[nameB].to_list()
+popA = [x for x in set( pop[nameA].to_list()) if str(x) != 'nan']
+popB = [x for x in set( pop[nameB].to_list()) if str(x) != 'nan']
+
+wild_dom = popA + popB
+
 wild_dom= wild_dom +['#CHROM','POS'] # add the first two columns that contains 
 pop_vcf = vcf[wild_dom]
 del vcf
@@ -54,7 +58,7 @@ for chr_vcf in chr_list_vcf :
         output.write('segsites: {nseg}\n'.format(nseg=sub_chr.shape[0]))
         segsite = ' '.join([str(round((1.0*i-pos)/locusLength,4)) for i in sub_chr['POS']])
         output.write('positions: {segsite}\n'.format(segsite=segsite))
-        for ind in pop[nameA].to_list() + pop[nameB].to_list():
+        for ind in popA.to_list() + popB.to_list():
             line = ''.join([str(x) for x  in sub_chr[ind]])
             output.write(line + '\n')
         output.write('\n')
@@ -67,8 +71,8 @@ bpfile = open(bpfile_path,'w')
 bpfile_data = []
 bpfile_data.append('spA={spA} spB={spB} Nref={Nref} mu={mu}\n'.format(spA=nameA,spB=nameB,Nref=Nref,mu=mu))
 bpfile_data.append('\t'.join([ str(locusLength) for x in range(nLocus)])+'\n')
-bpfile_data.append('\t'.join([ str(len(pop[nameA])) for x in range(nLocus)])+'\n')
-bpfile_data.append('\t'.join([ str(len(pop[nameB])) for x in range(nLocus)])+'\n')
+bpfile_data.append('\t'.join([ str(len(popA)) for x in range(nLocus)])+'\n')
+bpfile_data.append('\t'.join([ str(len(popB)) for x in range(nLocus)])+'\n')
 bpfile_data.append('\t'.join([ str(mu*4*Nref*locusLength)  for x in range(nLocus)])+'\n')
 bpfile_data.append('\t'.join([ str(rho_over_theta *mu*4*Nref*locusLength)  for x in range(nLocus)])+'\n')
 for line in bpfile_data:
