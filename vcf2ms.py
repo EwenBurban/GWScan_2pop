@@ -23,7 +23,7 @@ with open(vcf_file,'r') as f:
     line = f.readline()
     while line : 
         if pattern.search(line) :
-            header=line.split('\t')
+            header=line.strip().split('\t')
             line=False
         else:
             line=f.readline()
