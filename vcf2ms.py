@@ -58,7 +58,7 @@ for chr_vcf in chr_list_vcf :
         output.write('segsites: {nseg}\n'.format(nseg=sub_chr.shape[0]))
         segsite = ' '.join([str(round((1.0*i-pos)/locusLength,4)) for i in sub_chr['POS']])
         output.write('positions: {segsite}\n'.format(segsite=segsite))
-        for ind in popA.to_list() + popB.to_list():
+        for ind in popA + popB:
             line = ''.join([str(x) for x  in sub_chr[ind]])
             output.write(line + '\n')
         output.write('\n')
