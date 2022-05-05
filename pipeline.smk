@@ -7,13 +7,10 @@ wdir=config['work_dir']
 binpath=config['binpath']
 Nthread_shape_it=8
 popfile=config['popfile']
-locusLength=config['locusLength']
+locusLength=int(config['locusLength'])
 nameA=config['nameA']
 nameB=config['nameB']
-Nref=config['Nref']
-mu=config['mu']
-rho_over_theta=config['rho_over_theta']
-
+contig_file=['contig_file']
 ## list vcf files ##
 vcf_list_files = os.listdir(wdir)
 pattern= re.compile('.vcf')
@@ -90,32 +87,22 @@ rule haplotyping:
         mem_mb=2*len(vcf_list_files)*2000
     shell:
         """
-        {Sc}/python3.sif python3 {binpath}/make_haplo_vcf.py {input} {output}
+        {Sc}/python.sif python3 {binpath}/make_haplo_vcf.py {input} {output}
         """
 
-rule convert2ms:
-    input:
-        '{wdir}/haplotyped.vcf'
-    output:
-        ms_output=expand('{{wdir}}/{nameA}_{nameB}.ms',nameA=nameA,nameB=nameB),
-        bpfile='{wdir}/bpfile'
-    resources:
-        mem_mb=2*len(vcf_list_files)*2000
-    shell:
-        """
-        {Sc}/python3.sif python3 {binpath}/vcf2ms.py vcf_file={input} popfile={popfile}\
-                bpfile_path={output.bpfile}  outputfile_path={output.ms_output} locusLength={locusLength} \
-                nameA={nameA} nameB={nameB} Nref={Nref} mu={mu} rho_over_theta={rho_over_theta}
-        """
 
 rule calculate_globalstat:
     input:
-        expand('{{wdir}}/{nameA}_{nameB}.ms',nameA=nameA,nameB=nameB),
+        vcf = '{wdir}/haplotyped.vcf',
+		popfile = popfile,
+		contig_file = contig_file
     output:
         '{wdir}/ABCstat_loci.txt'
     shell:
         """
-        cat {input} | {Sc}/pypy.sif pypy {binpath}/mscalc_2pop_observedDataset_SFS.py {wdir} 0 False  
+		 {Sc}/python.sif python3 {binpath}/vcf2abc.py data={input.vcf} \
+			popfile={input.popfile} contig_file={input.contig_file} nameA=nameA\
+			nameB=nameB window_size=locusLength output_dir=wdir
         """
 
 rule visualisation:
