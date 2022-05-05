@@ -1,6 +1,0 @@
-Bootstrap: docker
-From: pypy
-
-%post
-pypy -V
-

@@ -1,0 +1,8 @@
+work_dir: .
+binpath: .
+popfile: template/exemple_popfile.csv
+locusLength: 100000
+nameA: wild
+nameB: dom
+contig_file: template/contig_data.txt
+

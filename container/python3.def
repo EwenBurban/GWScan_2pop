@@ -1,7 +1,0 @@
-Bootstrap: docker
-From: python:3
-
-%post
-pip install --upgrade pip
-pip install numpy pandas
-
