@@ -1,9 +1,0 @@
-work_dir: /scratch/eburban/DomIsol/test_input_module
-binpath: ~/GW_DILS/input_module
-popfile: /scratch/eburban/DomIsol/test_input_module/popfile.csv
-locusLength: 100000
-nameA: wild
-nameB: dom
-Nref: 85000
-mu: 3e-8
-rho_over_theta: 1.0
