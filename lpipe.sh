@@ -8,11 +8,12 @@
 ## load the necessary environement (used for Genouest cluster)
 . /local/env/envsnakemake-6.0.5.sh
 . /local/env/envsingularity-3.8.0.sh
-
+. config/config.sh
 ## directory of the code
-binpath='/home/genouest/cnrs_umr6553/eburban/GWScan_2pop/'
-
-## cluster version with slurm | If you use the cluster version, you must edit the filet cluster.json
-snakemake --snakefile ${binpath}/pipeline.smk -p -j 35 --configfile ${1} --cluster-config ${binpath}/cluster.json --cluster "sbatch --nodes={cluster.node} --ntasks={cluster.n} --cpus-per-task={cluster.cpusPerTask} --time={cluster.time} --mem-per-cpu={cluster.memPerCpu} -p {cluster.p} "  --latency-wait 60 --nolock -n 
+if [[ $mode != cluster ]]; then 
 ## without slurm
-#snakemake --snakefile ${binpath}/pipeline.smk -p -j 35 --configfile ${1}  --latency-wait 60 --nolock 
+snakemake --snakefile ${binpath}/pipeline.smk -p -j ${ntask_load} --configfile ${1}  --latency-wait 60 --nolock 
+else
+## cluster version with slurm | If you use the cluster version, you must edit the filet cluster.json
+snakemake --snakefile ${binpath}/pipeline.smk -p -j ${ntask_load} --configfile ${1} --cluster-config ${binpath}/cluster.json --cluster "sbatch --nodes={cluster.node} --ntasks={cluster.n} --cpus-per-task={cluster.cpusPerTask} --time={cluster.time} --mem-per-cpu={cluster.memPerCpu} -p {cluster.p} "  --latency-wait 60 --nolock  
+fi
