@@ -94,8 +94,8 @@ rule haplotyping:
 rule calculate_globalstat:
     input:
         vcf = '{wdir}/haplotyped.vcf',
-		popfile = expand('{popfile}',popfile=popfile),
-		contig_file = expand('{contig_file}',contig_file=contig_file)
+        popfile = expand('{popfile}',popfile=popfile),
+        contig_file = expand('{contig_file}',contig_file=contig_file)
     output:
         '{wdir}/ABCstat_loci.txt'
     shell:
