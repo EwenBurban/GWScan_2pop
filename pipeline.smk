@@ -99,8 +99,8 @@ rule calculate_globalstat:
     shell:
         """
 		 {Sc}/python.sif python3 {binpath}/vcf2abc.py data={input.vcf} \
-			popfile={input.popfile} contig_file={input.contig_file} nameA=nameA\
-			nameB=nameB window_size=locusLength output_dir=wdir
+			popfile={input.popfile} contig_file={input.contig_file} nameA={nameA}\
+			nameB={nameB} window_size={locusLength} output_dir=wdir
         """
 
 rule visualisation:
