@@ -10,7 +10,7 @@ popfile=config['popfile']
 locusLength=int(config['locusLength'])
 nameA=config['nameA']
 nameB=config['nameB']
-contig_file=['contig_file']
+contig_file=config['contig_file']
 ## list vcf files ##
 vcf_list_files = os.listdir(wdir)
 pattern= re.compile('.vcf')
@@ -27,9 +27,7 @@ wildcard_constraints:
 rule targets:
     input:
         rawdata = expand('{wdir}/{vcf}',wdir=wdir,vcf=vcf_list_files),
-        bpfile = expand('{wdir}/bpfile',wdir=wdir),
-        abc_stats = expand('{wdir}/ABCstat_loci.txt',wdir=wdir),
-        final_pdf = expand('{wdir}/gw_plot.pdf',wdir=wdir)
+        abc_stats = expand('{wdir}/ABCstat_loci.txt',wdir=wdir)
     shell:
         """
         rm shapeit*

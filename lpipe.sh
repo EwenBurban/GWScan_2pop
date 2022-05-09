@@ -6,8 +6,6 @@
 ## the provided argument is for --configfile, expecting the yaml file
 
 ## load the necessary environement (used for Genouest cluster)
-. /local/env/envsnakemake-6.0.5.sh
-. /local/env/envsingularity-3.8.0.sh
 . config/config.sh
 ## directory of the code
 if [[ $mode != cluster ]]; then 
