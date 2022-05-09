@@ -27,7 +27,7 @@ wildcard_constraints:
 rule targets:
     input:
         rawdata = expand('{wdir}/{vcf}',wdir=wdir,vcf=vcf_list_files),
-        abc_stats = expand('{wdir}/ABCstat_loci.txt',wdir=wdir)
+        abc_stats = expand('{wdir}/ABCstat_locus.txt',wdir=wdir)
     shell:
         """
         rm shapeit*
@@ -95,12 +95,12 @@ rule calculate_globalstat:
         popfile = expand('{popfile}',popfile=popfile),
         contig_file = expand('{contig_file}',contig_file=contig_file)
     output:
-        '{wdir}/ABCstat_loci.txt'
+        '{wdir}/ABCstat_locus.txt'
     shell:
         """
 		 {Sc}/python.sif python3 {binpath}/vcf2abc.py data={input.vcf} \
 			popfile={input.popfile} contig_file={input.contig_file} nameA={nameA}\
-			nameB={nameB} window_size={locusLength} output_dir=wdir
+			nameB={nameB} window_size={locusLength} output_dir={wdir}
         """
 
 rule visualisation:
