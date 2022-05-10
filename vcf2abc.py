@@ -41,7 +41,7 @@ for contig in contig_list:
         sfs_nsites = len(sel_snp_sfs)
         if sfs_nsites >= min_sites:
             piA_tmp = allel.sequence_diversity(pos,sub_acA,start=window[0],stop=window[1])
-            piB_tmp= allel.sequence_diversity(pos,sub_acA,start=window[0],stop=window[1])
+            piB_tmp= allel.sequence_diversity(pos,sub_acB,start=window[0],stop=window[1])
             dxy_tmp = allel.sequence_divergence(pos,sub_acA,sub_acB,start=window[0],stop=window[1])
             da_tmp = dxy_tmp - (piA_tmp + piB_tmp)/2
             TajDA_tmp = allel.tajima_d(sub_acA,pos,start=window[0],stop=window[1])
